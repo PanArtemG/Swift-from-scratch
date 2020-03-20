@@ -21,3 +21,23 @@ var color = userColor ?? defaultColor
 print (color) // defaultColor: red
 
 
+//!!! Многострочный литерал
+
+var str = """
+Строка без пробела
+   4 пробела
+Без пробела
+"""
+print(str)
+
+var simbol = "\'Special\' \t \"simbol\" \\ \n new string"
+/*
+         \ - экран для вывода символов
+         \n - new string
+         \t - tab
+ */
+
+var dollarSign = "\u{24}"
+var emoji = "\u{1F498}"
+print(emoji)
+
