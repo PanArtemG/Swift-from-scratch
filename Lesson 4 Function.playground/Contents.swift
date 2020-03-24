@@ -190,25 +190,29 @@ incrementerBySeven()
 incrementerBySeven()
 incrementerBySeven()
 
-// Сбегающие замыкание
+print("""
+
+---------------- Сбегающие замыкание ----------------
+
+""")
 
 var completionHandlers: [()->Void] = []
 
-func someFunkWithEscaping(completionHandler: @escaping () -> Void) {
+func withEscaping(completionHandler: @escaping () -> Void) {
     completionHandlers.append(completionHandler)
 }
 
-func someFunkWiyhout(closure: ()->Void) {
+func withoutEscaping(closure: ()->Void) {
     closure()
 }
 
 class SomeClass {
     var x = 10
     func doSomething() {
-        someFunkWithEscaping {
+        withEscaping {
             self.x = 100
         }
-        someFunkWiyhout {
+        withoutEscaping {
             x = 200
         }
     }
@@ -217,12 +221,13 @@ class SomeClass {
 let instance = SomeClass()
 
 instance.doSomething()
-print(instance.x)
+print(instance.x) // 200
+print(completionHandlers)
 
 completionHandlers.first?()
-print(instance.x)
+print(instance.x) //100
 
-// Автозамыкание
+///
 print("""
 
 ---------------- Автозамыкание ----------------
